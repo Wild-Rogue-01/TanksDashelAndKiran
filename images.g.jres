@@ -1,0 +1,17 @@
+{
+    "image1": {
+        "data": "hwQRAAsAAAAA8P//AAAAAAD///8PAAAA8P8A8P8AAADwDwAA/wAAAPAPAAD/AAAAAAAAAAAAAAAAAP8PAAAAAADw//8AAAAAAPAP/wAAAAAA8P//AAAAAAAA/w8AAAAAAAAAAAAAAADwDwAA/wAAAPAPAAD/AAAA8P8A8P8AAAAA////DwAAAADw//8AAAAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "cursor"
+    },
+    "image2": {
+        "data": "hwQQABAAAAAAABD/Hw8AAAAfEf8R/w8A8P8REfH/HwDw/x8R8f8RAf//HxHx/xEP//8fEREREf/x/xHxHxEREREREf//EfERERER//8R/x8RERHxHxH//xERHxEREf//EP//ERER8Q/w//8RERERAQD//x/xHxEAAPD///H/DwAAAPD/EQ8AAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "soccerBall"
+    },
+    "*": {
+        "mimeType": "image/x-mkcd-f4",
+        "dataEncoding": "base64",
+        "namespace": "myImages"
+    }
+}
