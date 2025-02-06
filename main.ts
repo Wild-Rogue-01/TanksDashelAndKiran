@@ -13,7 +13,11 @@ namespace userconfig {
 // event handler
 
 // functions
+function createTank() {
+
+}
 
 // on start
+createTank()
 
 // controller
