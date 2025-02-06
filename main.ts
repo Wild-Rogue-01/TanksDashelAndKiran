@@ -1,3 +1,5 @@
+// always check for things to pull
+
 // screen
 namespace userconfig {
     export const ARCADE_SCREEN_WIDTH = 320
