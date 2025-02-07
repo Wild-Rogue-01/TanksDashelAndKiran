@@ -15,6 +15,11 @@ namespace SpriteKind {
 class Tank extends sprites.ExtendableSprite {
     hitPoints: number
     gas: number
+    constructor(image: Image, kind: number) {
+        super(image, kind)
+        this.hitPoints = 100
+        this.gas = 10
+    }
     
 }
 class Shell extends sprites.ExtendableSprite {
@@ -24,13 +29,12 @@ class Shell extends sprites.ExtendableSprite {
     damage: number
     constructor(image: Image, kind: number) {
         super(image, kind)
-
     }
-    boom(tanks:Sprite[], shellDet: Sprite, num: number): number {
-        this.distDet = Math.sqrt((tanks[num].x - shellDet.x) ** 2 + (tanks[num].y - shellDet.y) ** 2)
-
+    boom(otherSprite: Sprite, sprite: Sprite): number {
+        this.distDet = Math.sqrt((otherSprite.x - sprite.x) ** 2 + (otherSprite.y - sprite.y) ** 2)
+        
         if (this.distDet < this.damRadius) {
-            this.damage = this.maxDamage/this.distDet
+            this.damage = this.maxDamage/(this.distDet**2
         } else {
             this.damage = 0
         }
@@ -39,15 +43,17 @@ class Shell extends sprites.ExtendableSprite {
 }
 
 // global variables
+let damageGlobal: number = null
 
 // game update
 
 // event handler
 scene.onHitWall(SpriteKind.Shell, function(sprite: Shell, location: tiles.Location) {
+    sprite.destroy()
     for (let i = 0; i < sprites.allOfKind(SpriteKind.Tank).length; i++) {
-        sprite.boom(sprites.allOfKind(SpriteKind.Tank), sprite, i)
+        damageGlobal = sprite.boom(sprites.allOfKind(SpriteKind.Tank)[i], sprite)
+
     }
-    
 })
 
 // functions
