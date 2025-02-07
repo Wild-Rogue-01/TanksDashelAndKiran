@@ -12,6 +12,11 @@ namespace SpriteKind {
     export const Shell = SpriteKind.create()
 }
 //Classes
+class Tank extends sprites.ExtendableSprite {
+    hitPoints: number
+    gas: number
+    
+}
 class Shell extends sprites.ExtendableSprite {
     maxDamage: number
     damRadius: number
@@ -38,9 +43,9 @@ class Shell extends sprites.ExtendableSprite {
 // game update
 
 // event handler
-scene.onHitWall(SpriteKind.Shell, function(sprite: Sprite, location: tiles.Location) {
+scene.onHitWall(SpriteKind.Shell, function(sprite: Shell, location: tiles.Location) {
     for (let i = 0; i < sprites.allOfKind(SpriteKind.Tank).length; i++) {
-        boom(sprites.allOfKind(SpriteKind.Tank), sprite, i)
+        sprite.boom(sprites.allOfKind(SpriteKind.Tank), sprite, i)
     }
     
 })
