@@ -34,7 +34,7 @@ class Shell extends sprites.ExtendableSprite {
         this.distDet = Math.sqrt((otherSprite.x - sprite.x) ** 2 + (otherSprite.y - sprite.y) ** 2)
         
         if (this.distDet < this.damRadius) {
-            this.damage = this.maxDamage/(this.distDet**2
+            this.damage = this.maxDamage/(this.distDet**2) 
         } else {
             this.damage = 0
         }
@@ -72,4 +72,3 @@ function attack() {
 createTank()
 
 // controller
-
