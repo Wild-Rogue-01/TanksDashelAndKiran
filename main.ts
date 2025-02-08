@@ -45,6 +45,8 @@ class Shell extends sprites.ExtendableSprite {
 // global variables
 let damageGlobal: number = null
 
+let tankArray: Image[] = [assets.image`tankBlue`, assets.image`tankRed`, assets.image`tankPurple`]
+
 // game update
 
 // event handler
@@ -70,3 +72,4 @@ function attack() {
 createTank()
 
 // controller
+

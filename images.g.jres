@@ -9,6 +9,26 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "soccerBall"
     },
+    "image3": {
+        "data": "hwQRABAAAAAAAAAAAAAAAAAAAAAA/Q0AAAAAAND/DwAAAICI+P8NAAAAiIj4/w8AAACIiPj/DQAAAIiI+P8PAAAAiIj4/w0AAACIiPj/DwAAAIiI+P8NAAAAiIj4/w8AAACIiPj/DQAAAICI+P8PAAAAgIj4/w0AAAAAAND/DwAAAAAAAP0NAAAAAAAAAAAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "tankBlue"
+    },
+    "image4": {
+        "data": "hwQRABAAAAAAAAAAAAAAAAAAAAAA/Q0AAAAAAND/DwAAACAi8v8NAAAAIiLy/w8AAAAiIvL/DQAAACIi8v8PAAAAIiLy/w0AAAAiIvL/DwAAACIi8v8NAAAAIiLy/w8AAAAiIvL/DQAAACAi8v8PAAAAICLy/w0AAAAAAND/DwAAAAAAAP0NAAAAAAAAAAAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "tankRed"
+    },
+    "image5": {
+        "data": "hwQRABAAAAAAAAAAAAAAAAAAAAAA/Q0AAAAAAND/DwAAAKCq+v8NAAAAqqr6/w8AAACqqvr/DQAAAKqq+v8PAAAAqqr6/w0AAACqqvr/DwAAAKqq+v8NAAAAqqr6/w8AAACqqvr/DQAAAKCq+v8PAAAAoKr6/w0AAAAAAND/DwAAAAAAAP0NAAAAAAAAAAAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "tankPurple"
+    },
+    "image6": {
+        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAA==",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "tankBarrel"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
