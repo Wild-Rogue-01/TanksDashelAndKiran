@@ -56,7 +56,7 @@ class Shell extends sprites.ExtendableSprite {
 let damageGlobal: number = null
 
 let tankArray: Image[] = [assets.image`tankBlue`, assets.image`tankRed`, assets.image`tankPurple`]
-let tileMapArray: tiles.TileMapData[] = []
+let tileMapArray: tiles.TileMapData[] = [assets.tilemap`grassMap`, ]
 let backgrounds: Image[] = []
 
 
