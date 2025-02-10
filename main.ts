@@ -59,6 +59,9 @@ scene.onHitWall(SpriteKind.Shell, function(sprite: Shell, location: tiles.Locati
 })
 
 // functions
+function startGame() {
+
+}
 function createTank() {
 
 }
@@ -69,6 +72,6 @@ function attack() {
     
 }
 // on start
-createTank()
+startGame()
 
 // controller
