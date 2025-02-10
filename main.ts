@@ -20,6 +20,7 @@ class Tank extends sprites.ExtendableSprite {
         this.hitPoints = 100
         this.gas = 10
     }
+
     
 }
 class Shell extends sprites.ExtendableSprite {
@@ -46,8 +47,12 @@ class Shell extends sprites.ExtendableSprite {
 let damageGlobal: number = null
 
 let tankArray: Image[] = [assets.image`tankBlue`, assets.image`tankRed`, assets.image`tankPurple`]
+let tileMapArray: tiles.TileMapData[] = []
+let backgrounds: Image[] = []
+
 
 // game update
+
 
 // event handler
 scene.onHitWall(SpriteKind.Shell, function(sprite: Shell, location: tiles.Location) {
