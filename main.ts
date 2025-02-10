@@ -20,8 +20,17 @@ class Tank extends sprites.ExtendableSprite {
         this.hitPoints = 100
         this.gas = 10
     }
-
-    
+    hit(dmg: number) {
+        this.hitPoints = this.hitPoints - dmg
+    }
+    move() {
+        if(this.gas > 0) {
+            this.gas--
+            console.log(this.gas)
+        } else {
+            game.showLongText("Out Of Gas", DialogLayout.Bottom)
+        }
+    }
 }
 class Shell extends sprites.ExtendableSprite {
     maxDamage: number
