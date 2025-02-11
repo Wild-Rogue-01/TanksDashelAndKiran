@@ -59,16 +59,19 @@ let tankArray: Image[] = [assets.image`tankBlue`, assets.image`tankRed`, assets.
 let tileMapArray: tiles.TileMapData[] = [assets.tilemap`grassMap`, ]
 let backgrounds: Image[] = []
 
+let tank1: Tank =
+    new Tank(tankArray[1], SpriteKind.Tank)
 
+let tankSpriteArray: Sprite[] = sprites.allOfKind(SpriteKind.Tank)
 // game update
 
 
 // event handler
-scene.onHitWall(SpriteKind.Shell, function(sprite: Shell, location: tiles.Location) {
+scene.onHitWall(SpriteKind.Shell, function (sprite: Shell, location: tiles.Location) {
     sprite.destroy()
     for (let i = 0; i < sprites.allOfKind(SpriteKind.Tank).length; i++) {
         damageGlobal = sprite.boom(sprites.allOfKind(SpriteKind.Tank)[i], sprite)
-
+        tankSpriteArray[i].hit(damageGlobal)
     }
 })
 
