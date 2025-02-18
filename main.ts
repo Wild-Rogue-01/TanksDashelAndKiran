@@ -55,15 +55,12 @@ class Shell extends sprites.ExtendableSprite {
 }
 
 // global variables
+let index: number = null
 let damageGlobal: number = null
 
 let tankArray: Image[] = [assets.image`tankBlue`, assets.image`tankRed`, assets.image`tankPurple`]
 let tileMapArray: tiles.TileMapData[] = [assets.tilemap`grassMap`, assets.tilemap`sandMap`]
-let backgrounds: Image[] = []
-
-let tank1: Tank = new Tank(tankArray[0], SpriteKind.Tank)
-let tank2: Tank = new Tank(tankArray[1], SpriteKind.Tank)
-let tank3: Tank = new Tank(tankArray[2], SpriteKind.Tank)
+let backgrounds:Image[] = [assets.image`sky`, assets.image`dust`]
 
 // game update
 
@@ -86,7 +83,13 @@ sprites.onOverlap(SpriteKind.Tank, SpriteKind.Projectile, function (sprite: Tank
 })
 // functions
 function startGame() {
-    
+    index = randint(0, tileMapArray.length - 1)
+    tiles.setCurrentTilemap(tileMapArray[index])
+    scene.setBackgroundImage(backgrounds[index])
+
+    let tank1: Tank = new Tank(tankArray[0], SpriteKind.Tank)
+    let tank2: Tank = new Tank(tankArray[1], SpriteKind.Tank)
+    let tank3: Tank = new Tank(tankArray[2], SpriteKind.Tank)
 }
 function createTank() {
 

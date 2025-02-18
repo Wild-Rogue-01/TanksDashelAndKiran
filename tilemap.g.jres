@@ -22,12 +22,6 @@
         "tilemapTile": true,
         "displayName": "leaves"
     },
-    "tile5": {
-        "data": "hwQQABAAAACIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiYiIiJiIiIiIiJiIiYmIiIiIiIiYiIiIiIiIiJmIiIiIiIiIiYiIiIiIiIiIiIiIiIiIiIiIiA==",
-        "mimeType": "image/x-mkcd-f4",
-        "tilemapTile": true,
-        "displayName": "water"
-    },
     "tile4": {
         "data": "hwQQABAAAACZmZmZmZmZmZmZmZmZlJmZmZmZlJmZmZSZmZmZmZmZmZlJmZmZlJmZmZmZmZmZmZmZmZlJmZmZlJmZmZmZmZmZmZmZmZmZlJmZmZmZmZmZmZmZmZmZmZmZmZmUmZSZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmQ==",
         "mimeType": "image/x-mkcd-f4",
