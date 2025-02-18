@@ -10,6 +10,7 @@ namespace userconfig {
 namespace SpriteKind {
     export const Tank = SpriteKind.create()
     export const Shell = SpriteKind.create()
+    export const Parachute = SpriteKind.create()
 
 }
 //Classes
@@ -24,11 +25,13 @@ class Tank extends sprites.ExtendableSprite {
     hit(dmg: number) {
         this.hitPoints = this.hitPoints - dmg
     }
-    move() {
+    move(): boolean {
         if(this.gas > 0) {
             this.gas--
+            return true
         } else {
             game.showLongText("Out Of Gas", DialogLayout.Bottom)
+            return false
         }
     }
 }
@@ -55,15 +58,25 @@ class Shell extends sprites.ExtendableSprite {
 }
 
 // global variables
+let playerTurn: boolean = true
+let tnt: boolean = null
+let tanksCreate: boolean = null
+let tankAir: boolean = null
+
 let index: number = null
 let damageGlobal: number = null
 
-let tankArray: Image[] = [assets.image`tankBlue`, assets.image`tankRed`, assets.image`tankPurple`]
+let player: Tank = null
+let enemyNum: number = null
+let tankArray: Image[] = [assets.image`tankBlue`, assets.image`tankRed`, assets.image`tankPurple`, assets.image`tankPink`, assets.image`tankBlack`]
 let tileMapArray: tiles.TileMapData[] = [assets.tilemap`grassMap`, assets.tilemap`sandMap`]
 let backgrounds:Image[] = [assets.image`sky`, assets.image`dust`]
 
-// game update
+let maxEnemyNum: number = tankArray.length
 
+let gravity: number = 75
+
+// game update
 
 // event handler
 scene.onHitWall(SpriteKind.Shell, function (sprite: Shell, location: tiles.Location) {
@@ -81,18 +94,22 @@ sprites.onOverlap(SpriteKind.Tank, SpriteKind.Projectile, function (sprite: Tank
     otherSprite.destroy()
     sprite.hit(damageGlobal)
 })
+
 // functions
 function startGame() {
     index = randint(0, tileMapArray.length - 1)
     tiles.setCurrentTilemap(tileMapArray[index])
     scene.setBackgroundImage(backgrounds[index])
 
-    let tank1: Tank = new Tank(tankArray[0], SpriteKind.Tank)
-    let tank2: Tank = new Tank(tankArray[1], SpriteKind.Tank)
-    let tank3: Tank = new Tank(tankArray[2], SpriteKind.Tank)
-}
-function createTank() {
-
+    for(let i = 0; i < enemyNum - 1; i++){
+        let tank: Tank = new Tank(tankArray[i], SpriteKind.Tank)
+        tiles.placeOnRandomTile(tank, assets.tile`grid`)
+        tank.vy = gravity
+    }
+    let player: Tank = new Tank(tankArray[tankArray.length-1], SpriteKind.Tank)
+    tiles.placeOnRandomTile(player, assets.tile`grid`)
+    player.vy = gravity
+    scene.cameraFollowSprite(player)
 }
 function selectWep() {
 
@@ -100,7 +117,24 @@ function selectWep() {
 function attack() {
     
 }
+function movement(tf:boolean, sprite:Tank) {
+    if (tf) {
+        
+    } else {
+        
+    }
+}
 // on start
+while (!tnt) {
+    enemyNum = game.askForNumber("Select 1-" + (maxEnemyNum - 1) + " enemies", 1)
+    tnt = enemyNum < maxEnemyNum && enemyNum > 0
+}
 startGame()
 
 // controller
+controller.left.onEvent(ControllerButtonEvent.Pressed, function() {
+    movement(false, player)
+})
+controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
+    movement(true, player)
+})
