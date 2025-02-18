@@ -10,8 +10,6 @@ namespace userconfig {
 namespace SpriteKind {
     export const Tank = SpriteKind.create()
     export const Shell = SpriteKind.create()
-    export const Parachute = SpriteKind.create()
-
 }
 //Classes
 class Tank extends sprites.ExtendableSprite {
