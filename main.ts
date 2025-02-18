@@ -72,6 +72,9 @@ let backgrounds:Image[] = [assets.image`sky`, assets.image`dust`]
 
 let maxEnemyNum: number = tankArray.length
 
+let moveX: number = 16
+let moveY: number = null
+
 let gravity: number = 75
 
 // game update
@@ -104,7 +107,7 @@ function startGame() {
         tiles.placeOnRandomTile(tank, assets.tile`grid`)
         tank.vy = gravity
     }
-    let player: Tank = new Tank(tankArray[tankArray.length-1], SpriteKind.Tank)
+    player = new Tank(tankArray[tankArray.length-1], SpriteKind.Tank)
     tiles.placeOnRandomTile(player, assets.tile`grid`)
     player.vy = gravity
     scene.cameraFollowSprite(player)
@@ -117,9 +120,9 @@ function attack() {
 }
 function movement(tf:boolean, sprite:Tank) {
     if (tf) {
-        
+        sprite.setPosition(sprite.x + moveX, moveY)
     } else {
-        
+        sprite.setPosition(sprite.x - moveX, moveY)
     }
 }
 // on start
