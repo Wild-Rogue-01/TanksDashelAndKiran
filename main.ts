@@ -10,11 +10,12 @@ namespace userconfig {
 namespace SpriteKind {
     export const Tank = SpriteKind.create()
     export const Shell = SpriteKind.create()
+
 }
 //Classes
 class Tank extends sprites.ExtendableSprite {
-    hitPoints: number
-    gas: number
+    hitPoints: number = null
+    gas: number = null
     constructor(image: Image, kind: number) {
         super(image, kind)
         this.hitPoints = 100
@@ -26,7 +27,6 @@ class Tank extends sprites.ExtendableSprite {
     move() {
         if(this.gas > 0) {
             this.gas--
-            console.log(this.gas)
         } else {
             game.showLongText("Out Of Gas", DialogLayout.Bottom)
         }
@@ -37,8 +37,10 @@ class Shell extends sprites.ExtendableSprite {
     damRadius: number
     distDet: number
     damage: number
-    constructor(image: Image, kind: number) {
+    constructor(image: Image, kind: number, dmg: number, rad: number) {
         super(image, kind)
+        this.maxDamage = dmg
+        this.damRadius = rad
     }
     boom(otherSprite: Sprite, sprite: Sprite): number {
         this.distDet = Math.sqrt((otherSprite.x - sprite.x) ** 2 + (otherSprite.y - sprite.y) ** 2)
@@ -59,10 +61,10 @@ let tankArray: Image[] = [assets.image`tankBlue`, assets.image`tankRed`, assets.
 let tileMapArray: tiles.TileMapData[] = [assets.tilemap`grassMap`, assets.tilemap`sandMap`]
 let backgrounds: Image[] = []
 
-let tank1: Tank =
-    new Tank(tankArray[1], SpriteKind.Tank)
+let tank1: Tank = new Tank(tankArray[0], SpriteKind.Tank)
+let tank2: Tank = new Tank(tankArray[1], SpriteKind.Tank)
+let tank3: Tank = new Tank(tankArray[2], SpriteKind.Tank)
 
-let tankSpriteArray: Sprite[] = sprites.allOfKind(SpriteKind.Tank)
 // game update
 
 
@@ -71,13 +73,20 @@ scene.onHitWall(SpriteKind.Shell, function (sprite: Shell, location: tiles.Locat
     sprite.destroy()
     for (let i = 0; i < sprites.allOfKind(SpriteKind.Tank).length; i++) {
         damageGlobal = sprite.boom(sprites.allOfKind(SpriteKind.Tank)[i], sprite)
-        tankSpriteArray[i].hit(damageGlobal)
+
+        let proj = sprites.createProjectileFromSprite(assets.image`blank`, sprites.allOfKind(SpriteKind.Projectile)[i], 0, 0)
+        if (sprites.allOfKind(SpriteKind.Projectile).length > 0) {
+            proj.setPosition(sprites.allOfKind(SpriteKind.Tank)[i].x, sprites.allOfKind(SpriteKind.Tank)[i].y)
+        }
     }
 })
-
+sprites.onOverlap(SpriteKind.Tank, SpriteKind.Projectile, function (sprite: Tank, otherSprite: Sprite) {
+    otherSprite.destroy()
+    sprite.hit(damageGlobal)
+})
 // functions
 function startGame() {
-
+    
 }
 function createTank() {
 
