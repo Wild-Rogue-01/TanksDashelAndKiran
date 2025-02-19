@@ -18,7 +18,7 @@ class Tank extends sprites.ExtendableSprite {
     constructor(image: Image, kind: number) {
         super(image, kind)
         this.hitPoints = 100
-        this.gas = 10
+        this.gas = 7
     }
     hit(dmg: number) {
         this.hitPoints = this.hitPoints - dmg
@@ -56,10 +56,8 @@ class Shell extends sprites.ExtendableSprite {
 }
 
 // global variables
-let playerTurn: boolean = true
 let tnt: boolean = null
-let tanksCreate: boolean = null
-let tankAir: boolean = null
+let pauseDam: boolean = null
 
 let index: number = null
 let damageGlobal: number = null
@@ -73,15 +71,17 @@ let backgrounds:Image[] = [assets.image`sky`, assets.image`dust`]
 let maxEnemyNum: number = tankArray.length
 
 let moveX: number = 16
-let moveY: number = null
 
 let gravity: number = 75
 
 // game update
+game.onUpdate(function() {
+})
 
 // event handler
 scene.onHitWall(SpriteKind.Shell, function (sprite: Shell, location: tiles.Location) {
     sprite.destroy()
+    pauseDam = false
     for (let i = 0; i < sprites.allOfKind(SpriteKind.Tank).length; i++) {
         damageGlobal = sprite.boom(sprites.allOfKind(SpriteKind.Tank)[i], sprite)
 
@@ -89,11 +89,13 @@ scene.onHitWall(SpriteKind.Shell, function (sprite: Shell, location: tiles.Locat
         if (sprites.allOfKind(SpriteKind.Projectile).length > 0) {
             proj.setPosition(sprites.allOfKind(SpriteKind.Tank)[i].x, sprites.allOfKind(SpriteKind.Tank)[i].y)
         }
+        pauseUntil(() => pauseDam)
     }
 })
 sprites.onOverlap(SpriteKind.Tank, SpriteKind.Projectile, function (sprite: Tank, otherSprite: Sprite) {
     otherSprite.destroy()
     sprite.hit(damageGlobal)
+    pauseDam = true
 })
 
 // functions
@@ -119,10 +121,18 @@ function attack() {
     
 }
 function movement(tf:boolean, sprite:Tank) {
-    if (tf) {
-        sprite.setPosition(sprite.x + moveX, moveY)
-    } else {
-        sprite.setPosition(sprite.x - moveX, moveY)
+    if (sprite.move()) {
+        if (tf) {
+            sprite.x += moveX
+        } else {
+            sprite.x -= moveX
+        }
+        while (tiles.tileAtLocationIsWall(sprite.tilemapLocation())) {
+            sprite.y -= 16
+        }
+        while (!sprite.isHittingTile(CollisionDirection.Bottom)) {
+            sprite.y += 16
+        }
     }
 }
 // on start
