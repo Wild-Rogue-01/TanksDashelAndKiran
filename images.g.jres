@@ -24,11 +24,6 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "tankPurple"
     },
-    "image6": {
-        "data": "hwQQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAAAAACAAAAAAAAAAIAAAAAAAAAAgAAAAAA==",
-        "mimeType": "image/x-mkcd-f4",
-        "displayName": "tankBarrel"
-    },
     "image7": {
         "data": "hwQBAAEAAAAAAAAA",
         "mimeType": "image/x-mkcd-f4",
@@ -58,6 +53,11 @@
         "data": "hwQHAAcAAADw//8A/y//D/8i8g8vMiIP/yLyD/8v/w/w//8A",
         "mimeType": "image/x-mkcd-f4",
         "displayName": "shell"
+    },
+    "image6": {
+        "data": "hwQUABAAAAAAAADwAAAAAAAAAPAAAAAAAAAA8AAAAAAAAADwAAAAAAAAAPAAAAAAAAAA8AAAAAAAAADwAAAAAAAAAPAAAAAAAAAA8AAAAAAAAADwAAAAAAAAAPAAAAAAAAAA8AAAAAAAAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "tankBarrel"
     },
     "*": {
         "mimeType": "image/x-mkcd-f4",

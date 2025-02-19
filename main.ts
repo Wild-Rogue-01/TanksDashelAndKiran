@@ -80,6 +80,7 @@ let tankArray: Image[] = [assets.image`tankBlue`, assets.image`tankRed`, assets.
 let tileMapArray: tiles.TileMapData[] = [assets.tilemap`grassMap`, assets.tilemap`sandMap`]
 let backgrounds:Image[] = [assets.image`sky`, assets.image`dust`]
 
+
 let maxEnemyNum: number = tankArray.length
 
 let moveX: number = 16
@@ -168,7 +169,6 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
 
         setShellSi()
         dart = darts.create(assets.image`blank`, SpriteKind.Dart)
-
         shell = new Shell (assets.image`shell`, SpriteKind.Shell, shellSi * 75, shellSi)
 
         dart.setFlag(SpriteFlag.AutoDestroy, true)
@@ -176,6 +176,7 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
 
         dart.setPosition(player.x, player.y)
         dart.controlWithArrowKeys()
+        
         dart.setTrace(false)
 
         shell.setPosition(dart.x, dart.y)
