@@ -10,6 +10,8 @@ namespace userconfig {
 namespace SpriteKind {
     export const Tank = SpriteKind.create()
     export const Shell = SpriteKind.create()
+    export const Dart = SpriteKind.create()
+
 }
 //Classes
 class Tank extends sprites.ExtendableSprite {
@@ -18,10 +20,13 @@ class Tank extends sprites.ExtendableSprite {
     constructor(image: Image, kind: number) {
         super(image, kind)
         this.hitPoints = 100
-        this.gas = 7
+        this.gas = 75
     }
-    hit(dmg: number) {
+    hit(dmg: number, sprite: Sprite) {
         this.hitPoints = this.hitPoints - dmg
+        if (this.hitPoints <= 0) {
+            sprite.destroy()
+        }
     }
     move(): boolean {
         if(this.gas > 0) {
@@ -47,7 +52,9 @@ class Shell extends sprites.ExtendableSprite {
         this.distDet = Math.sqrt((otherSprite.x - sprite.x) ** 2 + (otherSprite.y - sprite.y) ** 2)
         
         if (this.distDet < this.damRadius) {
-            this.damage = this.maxDamage/(this.distDet**2) 
+            this.damage = this.maxDamage/this.distDet 
+        } else if (this.distDet == 0) {
+            this.damage = this.maxDamage
         } else {
             this.damage = 0
         }
@@ -56,7 +63,12 @@ class Shell extends sprites.ExtendableSprite {
 }
 
 // global variables
-let tnt: boolean = null
+let dart: Dart = null
+let shell: Shell = null
+
+let attackReady: boolean = false
+let shellSi: number = null
+
 let pauseDam: boolean = null
 
 let index: number = null
@@ -76,25 +88,24 @@ let gravity: number = 75
 
 // game update
 game.onUpdate(function() {
+
 })
 
 // event handler
 scene.onHitWall(SpriteKind.Shell, function (sprite: Shell, location: tiles.Location) {
-    sprite.destroy()
-    pauseDam = false
+    shell.destroy()
     for (let i = 0; i < sprites.allOfKind(SpriteKind.Tank).length; i++) {
         damageGlobal = sprite.boom(sprites.allOfKind(SpriteKind.Tank)[i], sprite)
 
-        let proj = sprites.createProjectileFromSprite(assets.image`blank`, sprites.allOfKind(SpriteKind.Projectile)[i], 0, 0)
+        let proj = sprites.createProjectileFromSprite(assets.image`shell`, sprites.allOfKind(SpriteKind.Projectile)[i], 0, 0)
         if (sprites.allOfKind(SpriteKind.Projectile).length > 0) {
             proj.setPosition(sprites.allOfKind(SpriteKind.Tank)[i].x, sprites.allOfKind(SpriteKind.Tank)[i].y)
         }
-        pauseUntil(() => pauseDam)
     }
 })
 sprites.onOverlap(SpriteKind.Tank, SpriteKind.Projectile, function (sprite: Tank, otherSprite: Sprite) {
     otherSprite.destroy()
-    sprite.hit(damageGlobal)
+    sprite.hit(damageGlobal, sprite)
     pauseDam = true
 })
 
@@ -114,12 +125,6 @@ function startGame() {
     player.vy = gravity
     scene.cameraFollowSprite(player)
 }
-function selectWep() {
-
-}
-function attack() {
-    
-}
 function movement(tf:boolean, sprite:Tank) {
     if (sprite.move()) {
         if (tf) {
@@ -130,22 +135,60 @@ function movement(tf:boolean, sprite:Tank) {
         while (tiles.tileAtLocationIsWall(sprite.tilemapLocation())) {
             sprite.y -= 16
         }
-        while (!sprite.isHittingTile(CollisionDirection.Bottom)) {
-            sprite.y += 16
-        }
+        sprite.vy = gravity
+    }
+}
+function setShellSi () {
+    shellSi = game.askForNumber("Select a shell size", 1)
+    if (shellSi > 5 || shellSi < 0) {
+        setShellSi()
     }
 }
 // on start
-while (!tnt) {
+while (!(enemyNum < maxEnemyNum && enemyNum > 0)) {
     enemyNum = game.askForNumber("Select 1-" + (maxEnemyNum - 1) + " enemies", 1)
-    tnt = enemyNum < maxEnemyNum && enemyNum > 0
 }
 startGame()
 
 // controller
 controller.left.onEvent(ControllerButtonEvent.Pressed, function() {
-    movement(false, player)
+    if (attackReady == false) {
+        movement(false, player)
+    }
 })
 controller.right.onEvent(ControllerButtonEvent.Pressed, function () {
-    movement(true, player)
+    if (attackReady == false) {
+        movement(true, player)
+    }
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function() {
+    if (attackReady == false) {
+        sprites.destroyAllSpritesOfKind(SpriteKind.Shell)
+        sprites.destroyAllSpritesOfKind(SpriteKind.Dart)
+
+        setShellSi()
+        dart = darts.create(assets.image`blank`, SpriteKind.Dart)
+
+        shell = new Shell (assets.image`shell`, SpriteKind.Shell, shellSi * 75, shellSi)
+
+        dart.setFlag(SpriteFlag.AutoDestroy, true)
+        dart.setFlag(SpriteFlag.Ghost, true)
+
+        dart.setPosition(player.x, player.y)
+        dart.controlWithArrowKeys()
+        dart.setTrace(false)
+
+        shell.setPosition(dart.x, dart.y)
+        shell.setFlag(SpriteFlag.AutoDestroy, true)
+
+        shell.follow(dart, 1000, 0)
+
+        attackReady = true
+    }
+})
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (attackReady == true) {
+        dart.throwDart()
+        attackReady = false
+    }
 })

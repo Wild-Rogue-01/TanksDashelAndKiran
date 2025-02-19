@@ -640,6 +640,16 @@ ddd3bbbbbbdddddddddddd3bbbbbbbbbddddddddddd3bbbbbbdddddddddddd3bbbbbbbbbdddddddd
 . . . . . . . . . . . . . . . . . 
 . . . . . . . . . . . . . . . . . 
 `;
+            case "image10":
+            case "shell":return img`
+. f f f f f . 
+f f f 2 f f f 
+f f 2 2 2 f f 
+f 2 2 3 2 2 f 
+f f 2 2 2 f f 
+f f f 2 f f f 
+. f f f f f . 
+`;
         }
         return null;
     })

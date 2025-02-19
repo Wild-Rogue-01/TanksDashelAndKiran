@@ -2,7 +2,8 @@
     "name": "5.9.2 The Unit Project",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "darts": "*"
     },
     "files": [
         "main.ts",

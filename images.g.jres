@@ -54,6 +54,11 @@
         "mimeType": "image/x-mkcd-f4",
         "displayName": "tankPink"
     },
+    "image10": {
+        "data": "hwQHAAcAAADw//8A/y//D/8i8g8vMiIP/yLyD/8v/w/w//8A",
+        "mimeType": "image/x-mkcd-f4",
+        "displayName": "shell"
+    },
     "*": {
         "mimeType": "image/x-mkcd-f4",
         "dataEncoding": "base64",
